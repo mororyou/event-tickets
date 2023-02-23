@@ -1,10 +1,9 @@
 import { AppShell, useMantineTheme } from '@mantine/core'
-
 import Head from 'next/head'
 import { FC, useState } from 'react'
 import HeaderComponent from '../components/admin/Header'
 import NaviComponent from '../components/admin/Nav'
-import { NavItems } from '../components/admin/NavItems'
+import { SettingNavItem } from '../components/admin/SettingNavItems'
 
 type Props = {
   title: string
@@ -12,7 +11,7 @@ type Props = {
   children: React.ReactNode
 }
 
-const AdminLayout: FC<Props> = ({ title, active, children }) => {
+const SettingLayout: FC<Props> = ({ title, active, children }) => {
   const theme = useMantineTheme()
   const [opened, setOpened] = useState(false)
   return (
@@ -21,7 +20,7 @@ const AdminLayout: FC<Props> = ({ title, active, children }) => {
         <title>{title}</title>
       </Head>
       <AppShell
-        navbar={NaviComponent(opened, NavItems)}
+        navbar={NaviComponent(opened, SettingNavItem)}
         header={HeaderComponent(opened, setOpened, theme)}
         styles={{
           main: {
@@ -38,4 +37,4 @@ const AdminLayout: FC<Props> = ({ title, active, children }) => {
   )
 }
 
-export default AdminLayout
+export default SettingLayout
