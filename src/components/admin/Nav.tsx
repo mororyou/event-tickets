@@ -1,47 +1,8 @@
 import { Group, Navbar, Text, ThemeIcon, UnstyledButton } from '@mantine/core'
-import {
-  IconCalendarEvent,
-  IconDashboard,
-  IconFlag,
-  IconListNumbers,
-  IconUser,
-} from '@tabler/icons'
 import Link from 'next/link'
 import { NaviItem } from '../../types/types'
 
-const NaviComponent = (opened: boolean) => {
-  const items: NaviItem[] = [
-    {
-      pageId: 'dashboard',
-      title: 'ダッシュボード',
-      color: 'blue',
-      icon: <IconDashboard size={16} />,
-    },
-    {
-      pageId: 'receptions',
-      title: '受付一覧',
-      color: 'blue',
-      icon: <IconListNumbers size={16} />,
-    },
-    {
-      pageId: 'schedules',
-      title: 'スケジュール',
-      color: 'blue',
-      icon: <IconCalendarEvent size={16} />,
-    },
-    {
-      pageId: 'users',
-      title: 'ユーザー設定',
-      color: 'blue',
-      icon: <IconUser size={16} />,
-    },
-    {
-      pageId: 'booths',
-      title: 'ブース設定',
-      color: 'blue',
-      icon: <IconFlag size={16} />,
-    },
-  ]
+const NaviComponent = (opened: boolean, naviitems: NaviItem[]) => {
   return (
     <Navbar
       p="md"
@@ -49,8 +10,8 @@ const NaviComponent = (opened: boolean) => {
       hidden={!opened}
       width={{ sm: 250, lg: 300 }}
     >
-      {items &&
-        items.map((item: NaviItem) => {
+      {naviitems &&
+        naviitems.map((item: NaviItem) => {
           return (
             <Link href={`/admin/${item.pageId}`} key={item.pageId}>
               <UnstyledButton

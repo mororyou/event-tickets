@@ -12,7 +12,7 @@ const ClientLayout: FC<Props> = ({ title, children }) => {
       <Head>
         <title>{title}</title>
       </Head>
-      <main className="flex flex-col">{children}</main>
+      <main className="flex min-h-screen flex-col">{children}</main>
     </>
   )
 }
