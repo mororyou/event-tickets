@@ -34,7 +34,7 @@ export const NavItems: NaviItem[] = [
     icon: <IconUser size={16} />,
   },
   {
-    pageId: 'apply',
+    pageId: 'questionnaire',
     title: 'フォーム設定',
     color: 'blue',
     icon: <IconSignature size={16} />,
