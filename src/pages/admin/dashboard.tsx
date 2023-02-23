@@ -1,11 +1,15 @@
 import { ScrollArea, Table } from '@mantine/core'
 import { IconListDetails, IconMessageCircle } from '@tabler/icons'
+import { FC } from 'react'
 import BoothCard from '../../components/admin/BoothCard'
 import PopularCard from '../../components/admin/PopularCard'
 import Title from '../../components/admin/Title'
+import useQueryStayApplies from '../../hooks/apply/useQueryStayApplies'
 import AdminLayout from '../../layout/admin'
+import { Apply } from '../../types/types'
 
 const DashBoard = () => {
+  const { data: applies } = useQueryStayApplies()
   return (
     <AdminLayout title="Dashboard" active={'dashboard'}>
       <div className="flex flex-col gap-y-4">
@@ -49,11 +53,15 @@ const DashBoard = () => {
           btn={null}
           icon={<IconListDetails size={24} className="mr-2 text-gray-700" />}
         />
-
-        <ScrollArea>
+        <ScrollArea className="mb-8">
           <Table sx={{ minWidth: 800 }} verticalSpacing="xs">
             <Thead />
-            <tbody></tbody>
+            <tbody>
+              {applies &&
+                applies.map((apply) => {
+                  return <TableRow key={apply.id} apply={apply} />
+                })}
+            </tbody>
           </Table>
         </ScrollArea>
       </div>
@@ -74,3 +82,24 @@ const Thead = () => (
     </tr>
   </thead>
 )
+
+type RowProps = {
+  apply: Apply
+}
+
+const TableRow: FC<RowProps> = ({ apply }) => {
+  const categories = Object.values(apply.contents)
+  return (
+    <tr>
+      <td>{apply.time}</td>
+      <td>{apply.name}</td>
+      <td>{apply.url}</td>
+      <td>
+        {categories.map((category, index) => (
+          <span key={index}>category</span>
+        ))}
+      </td>
+      <td></td>
+    </tr>
+  )
+}
